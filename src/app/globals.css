@@ -3,19 +3,110 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	/* --primary: theme(colors.primary); */
+	--primary: theme(colors.primary);
+	--primary-light: theme(colors.primary_light);
+	--primary-med: theme(colors.primary_med);
+	--secondary: theme(colors.secondary);
+	--secondary-light: theme(colors.secondary_light);
+	--secondary-dark: theme(colors.secondary_dark);
+	--accent: theme(colors.accent);
+	--accent-light: theme(colors.accent_light);
+	--true-blue: theme(colors.true_blue);
+	--blue-light: theme(colors.blue_light);
+	--cornell: theme(colors.cornell);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.clip-side {
+	clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+}
+
+.perspective {
+	perspective: 1000px;
+}
+
+.box {
+	transform-style: preserve-3d;
+	transition: transform 0.6s;
+}
+
+.box:hover {
+	transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.masked {
+	mask-image: linear-gradient(
+		to right,
+		transparent,
+		black 10%,
+		black 90%,
+		transparent
+	);
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent,
+		black 10%,
+		black 90%,
+		transparent
+	);
+	mask-repeat: no-repeat;
+	mask-size: 100% 100%;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+}
+
+.masked-container {
+	mask-image: linear-gradient(
+		to right,
+		transparent,
+		black 10%,
+		black 90%,
+		transparent
+	);
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent,
+		black 10%,
+		black 90%,
+		transparent
+	);
+}
+
+@keyframes marquee {
+	from {
+		transform: translateX(1%);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
+	user-select: none;
+	caret-color: transparent;
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+input {
+	caret-color: dimgrey;
 }
