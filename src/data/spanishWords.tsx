@@ -1,4 +1,44 @@
-const spanishWords = {
+import { WordObject } from "../types/types"
+
+interface WordGroup {
+	// id: string
+	name: string | Array<string>
+	info: string[]
+	[key: string]: WordObject | string | string[]
+}
+
+interface VerbGroup {
+	id: string
+	name: string
+	info: string[]
+	ser: VerbRoot
+	[key: string]: VerbRoot | string[] | string
+}
+
+interface VerbRoot extends WordObject {
+	info: string[]
+	present?: Record<string, VerbConjugation>
+	past?: Record<string, VerbConjugation>
+	// extend with other tenses later
+}
+
+interface VerbConjugation extends WordObject {
+	tense: string
+	person: string
+}
+
+interface SpanishWords {
+	artcl: WordGroup
+	conj: WordGroup
+	pron: WordGroup
+	prep: WordGroup
+	advrb: WordGroup
+	noun: WordGroup
+	verb: VerbGroup
+	dObj: WordGroup
+}
+
+const spanishWords: SpanishWords = {
 	// idioms: [
 	// 	{
 	// 		idiom: "A 2:00",
@@ -133,6 +173,7 @@ const spanishWords = {
 				"Qué can mean HOW in the sense of HOW lucky, would be Qué Lucky! or What Lucky!/What Luck!",
 				"Para qué is an idiom which means 'So that' or 'In order that'",
 			],
+			pos: "Pronoun",
 		},
 	},
 	prep: {

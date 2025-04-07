@@ -1,48 +1,50 @@
 // maybe change to prounoun.eso or conjunction.y conjuction.que
 "use client"
 
-import { sendError } from "next/dist/server/api-utils"
+import type { Lesson } from "@/types/types"
+
+// import { sendError } from "next/dist/server/api-utils"
 import words from "./spanishWords"
-import { data } from "autoprefixer"
-import { EditCalendar } from "@mui/icons-material"
+// import { data } from "autoprefixer"
+// import { EditCalendar } from "@mui/icons-material"
 
 const { conj, pron, prep, advrb, noun, verb, artcl, dObj } = words
 
-const sideLessonPotential = [
-	{
-		lesson: 1,
-		info: "general intro, info",
-	},
-	{
-		lesson: 2,
-		info: "FOOD test, EAT test, Potato head game.",
-	},
-	{
-		lesson: 6,
-		info: [
-			"Find the direct object",
-			"explains positions of NO vs Direct Obj pronouns",
-		],
-	},
-	{
-		lesson: 8,
-		info: [
-			"Find the direct object PRONOUN",
-			"Direct obj Pronoun memory palace",
-			"explains posisitions of direct object vs direct object pronouns",
-		],
-	},
-	{
-		lesson: 12,
-		info: ["Guess if is is being used as ES"],
-	},
-	{
-		lesson: 13,
-		info: ["Ser memory palace"],
-	},
-]
+// const sideLessonPotential = [
+// 	{
+// 		lesson: 1,
+// 		info: "general intro, info",
+// 	},
+// 	{
+// 		lesson: 2,
+// 		info: "FOOD test, EAT test, Potato head game.",
+// 	},
+// 	{
+// 		lesson: 6,
+// 		info: [
+// 			"Find the direct object",
+// 			"explains positions of NO vs Direct Obj pronouns",
+// 		],
+// 	},
+// 	{
+// 		lesson: 8,
+// 		info: [
+// 			"Find the direct object PRONOUN",
+// 			"Direct obj Pronoun memory palace",
+// 			"explains posisitions of direct object vs direct object pronouns",
+// 		],
+// 	},
+// 	{
+// 		lesson: 12,
+// 		info: ["Guess if is is being used as ES"],
+// 	},
+// 	{
+// 		lesson: 13,
+// 		info: ["Ser memory palace"],
+// 	},
+// ]
 
-const spanishData = {
+const spanishData: { lessons: Record<number, Lesson> } = {
 	lessons: {
 		1: {
 			lesson: 1,
@@ -87,6 +89,8 @@ const spanishData = {
 				verb.info[1],
 				verb.info[2],
 			],
+			wordBank: [],
+			sentences: [],
 		},
 		3: {
 			lesson: 3,
@@ -269,7 +273,7 @@ const spanishData = {
 					sentence: "I told him that we arrived",
 					translation: "I told him QUE we arrived",
 					data: [
-						{ phrase: "I told him" },
+						{ word: "I told him" },
 						{ word: "that", translation: conj.que },
 						{ word: "we" },
 						{ word: "arrived" },
@@ -280,7 +284,7 @@ const spanishData = {
 					sentence: "I hope that you have a nice day",
 					translation: "I hope QUE you have a nice day",
 					data: [
-						{ phrase: "I hope" },
+						{ word: "I hope" },
 						{ word: "that", translation: conj.que },
 						{ word: "you" },
 						{ word: "have" },
@@ -618,7 +622,7 @@ const spanishData = {
 					data: [
 						{ word: "I'm tired" },
 						{ word: "of", translation: prep.de },
-						{ phrase: "waiting around like this" },
+						{ word: "waiting around like this" },
 					],
 				},
 				{
@@ -767,6 +771,8 @@ const spanishData = {
 				prep.de.info[3],
 				prep.de.info[4],
 			],
+			wordBank: [],
+
 			sentences: [
 				{
 					id: 1,
@@ -828,9 +834,9 @@ const spanishData = {
 					sentence: "They took it to the lady from Italy",
 					translation: "They took it A the lady DE Italy",
 					data: [
-						{ phrase: "They took it" },
+						{ word: "They took it" },
 						{ word: "to", translation: prep.a },
-						{ phrase: "the lady" },
+						{ word: "the lady" },
 						{ word: "from", translation: prep.de },
 						{ word: "Italy" },
 					],
@@ -1272,7 +1278,7 @@ const spanishData = {
 						},
 						{ word: "the" },
 						{
-							phrasE: "girl's things",
+							phrase: "girl's things",
 							translation: [prep.de, artcl.la],
 							phraseTranslation: "things DE LA girl",
 							reference: { "prep.de": [2] },
@@ -1333,7 +1339,7 @@ const spanishData = {
 						{ word: "and", translation: conj.y },
 						{ word: "I" },
 						{ word: "told" },
-						{ phrase: "her" },
+						{ word: "her" },
 						{
 							phrase: "it was OK",
 							translation: conj.que,
@@ -1355,7 +1361,7 @@ const spanishData = {
 							phraseTranslation: "NO will say",
 							reference: { "advrb.no": [6] },
 						},
-						{ word: "that", tranlation: conj.que },
+						{ word: "that", translation: conj.que },
 						{ word: "I" },
 						{ word: "did" },
 						{ word: "it" },
@@ -1746,7 +1752,7 @@ const spanishData = {
 				},
 				{
 					id: 3,
-					sentencce: "The woman has a daughter",
+					sentence: "The woman has a daughter",
 					translation: "LA woman has UNA daughter",
 					data: [
 						{ word: "The", translation: artcl.la },
@@ -1869,7 +1875,7 @@ const spanishData = {
 					translation: "He said QUE he moved DE Peru A California",
 					data: [
 						{
-							phrase: "He said",
+							word: "He said",
 						},
 						{ word: "that", translation: conj.que },
 						{ word: "he moved" },
@@ -1885,7 +1891,7 @@ const spanishData = {
 					translation: "EL father DE John LA found",
 					data: [
 						{
-							word: "John's father",
+							phrase: "John's father",
 							translation: [prep.de, artcl.el],
 							phraseTranslation: "EL father DE John",
 						},
@@ -2014,7 +2020,7 @@ const spanishData = {
 					sentence: "That was because of those problems",
 					translation: "ESO was POR those problems",
 					data: [
-						{ word: "That", tranlation: dObj.eso },
+						{ word: "That", translation: pron.eso },
 						{ word: "was" },
 						{ word: "beacuase of", translation: prep.por },
 						{ word: "those problems" },
@@ -2290,7 +2296,7 @@ const spanishData = {
 							reference: { "conj.que": [1] },
 						},
 						{
-							word: "that's why",
+							phrase: "that's why",
 							translation: [prep.por, pron.eso],
 							phraseTranslation: "POR ESO",
 							reference: { "prep.por": [9] },
@@ -2409,7 +2415,7 @@ const spanishData = {
 						{ word: "worked" },
 						{ word: "with", translation: prep.con },
 						{
-							phrase: "what?",
+							word: "what?",
 							translation: pron.que,
 						},
 					],
@@ -4882,6 +4888,7 @@ const spanishData = {
 				},
 				{},
 			],
+			wordBank: [],
 		},
 		15: {
 			lesson: 15,
@@ -5483,10 +5490,11 @@ const spanishData = {
 					],
 				},
 			],
+			wordBank: [],
 		},
 		16: {
-			id: 16,
-			lesson: "Lesson 16",
+			lesson: 16,
+			name: "Lesson 16",
 			details: "New ways to use SER. SER and Prepositions",
 			info: [
 				"To give this lesson some context, taks a step back and consider specificaly why you are learning Spanish. \nIs there someone close to you that you want to connect to, or are there specific activities that would be easier, also what specific convsersation topics do you, personall, wish to be able to talk about in fluid spontaneous Spanish?",
@@ -6006,6 +6014,7 @@ const spanishData = {
 					],
 				},
 			],
+			wordBank: [],
 		},
 	},
 }
