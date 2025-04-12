@@ -11,32 +11,32 @@ interface SpanishWords {
 	dObj: WordGroup
 }
 
-const spanishWords: SpanishWords = {
-	// idioms: [
-	// 	{
-	// 		idiom: "A 2:00",
-	// 		translations: "At 2:00",
-	// 	},
-	// 	{ idiom: "por eso", translations: ["because of that", "that's why"] },
-	// 	{ idiom: "para eso", translations: "intended for that" },
-	// 	{
-	// 		idiom: "para qué",
-	// 		translations: [
-	// 			"intended for what",
-	// 			"for what purposre",
-	// 			"for what intended use",
-	// 		],
-	// 	},
-	// 	{
-	// 		idiom: "por que",
-	// 		translations: ["because of what", "why"],
-	// 	},
-	// 	{
-	// 		idiom: "para que",
-	// 		translations: ["so that", "in order that"],
-	// 	},
-	// ],
+// idioms: [
+// 	{
+// 		idiom: "A 2:00",
+// 		translations: "At 2:00",a
+// 	},
+// 	{ idiom: "por eso", translations: ["because of that", "that's why"] },
+// 	{ idiom: "para eso", translations: "intended for that" },
+// 	{
+// 		idiom: "para qué",
+// 		translations: [
+// 			"intended for what",
+// 			"for what purposre",
+// 			"for what intended use",
+// 		],
+// 	},
+// 	{
+// 		idiom: "por que",
+// 		translations: ["because of what", "why"],
+// 	},
+// 	{
+// 		idiom: "para que",
+// 		translations: ["so that", "in order that"],
+// 	},
+// ],
 
+const spanishWords: SpanishWords = {
 	artcl: {
 		id: "artcl",
 		name: "Article",
