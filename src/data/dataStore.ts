@@ -1,6 +1,6 @@
 import { create } from "zustand"
-import { persist } from "zustand/middleware"
 import type { Lesson, Sentence } from "../types/types"
+import spanishData from "./spanishData"
 
 interface DataState {
 	currentLesson: Lesson | null
@@ -11,26 +11,11 @@ interface DataState {
 	setCurrentSentence: (sentence: Sentence) => void
 }
 
-export const useDataStore = create<DataState>()(
-	persist(
-		(set) => ({
-			currentLesson: null,
-			currentSentence: null,
+export const useDataStore = create<DataState>((set) => ({
+	currentLesson: spanishData.lessons[2],
+	currentSentence: spanishData.lessons[2]?.sentences?.[0] || null,
 
-			setCurrentLesson: (lesson) =>
-				set({
-					currentLesson: lesson,
-					currentSentence: lesson.sentences?.[0] || null,
-				}),
-
-			setCurrentSentence: (sentence) => set({ currentSentence: sentence }),
-		}),
-		{
-			name: "language-app-data",
-			// Only persist specific values if needed
-			// partialize: (state) => ({
-			// 	userProgress: state.userProgress,
-			// }),
-		}
-	)
-)
+	setCurrentLesson: (lesson: Lesson) => set({ currentLesson: lesson }),
+	setCurrentSentence: (sentence: Sentence) =>
+		set({ currentSentence: sentence }),
+}))

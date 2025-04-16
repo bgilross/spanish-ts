@@ -1,46 +1,63 @@
 "use client"
 
-// import { useSelector, useDispatch } from "react-redux"
-// import type { RootState, AppDispatch } from "@/data/store"
-// import { setLesson, setSentence } from "@/data/dataSlice"
-// import spanishData from "../data/spanishData" // adjust import path as needed
+import { useDataStore } from "@/data/dataStore"
+import spanishData from "@/data/spanishData"
 
 const Header = () => {
-	// const dispatch: AppDispatch = useDispatch()
+	const currentLesson = useDataStore((s) => s.currentLesson)
+	const setLesson = useDataStore((s) => s.setCurrentLesson)
+	const currentSentence = useDataStore((s) => s.currentSentence)
+	const setSentence = useDataStore((s) => s.setCurrentSentence)
 
-	// const lessonIndex = useSelector(
-	// 	(state: RootState) => state.data.currentLessonIndex
-	// )
-	// const sentenceIndex = useSelector(
-	// 	(state: RootState) => state.data.currentSentenceIndex
-	// )
+	const handleLessonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const index = parseInt(e.target.value, 10)
+		const lesson = spanishData.lessons[index]
+		setLesson(lesson)
+		if (lesson.sentences?.[0]) setSentence(lesson.sentences[0])
+	}
 
-	// const lessons = Object.values(spanishData)
-	// const currentLesson = lessons[lessonIndex]
+	const handleSentenceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const index = parseInt(e.target.value, 10) //coerce string to int. dropdowns are always string?
+		if (currentLesson?.sentences?.[index]) {
+			setSentence(currentLesson.sentences[index])
+		} else {
+			console.log("No sentence # " + index + " found for this lesson.")
+		}
+	}
 
 	return (
-		<header className="bg-primary text-secondary shadow-2xl shadow-primary rounded-b-xl h-16 px-6 flex items-center justify-between z-10 w-full">
-			<div className="text-2xl font-bold">SpanishTester</div>
-			<div className="flex gap-4 items-center">
-				{/* <select
-					value={lessonIndex}
-					onChange={(e) => dispatch(setLesson(Number(e.target.value)))}
-					className="bg-secondary text-primary p-1 rounded"
+		<header className="w-full p-4 bg-gray-100 border-b flex justify-center">
+			<div className="flex items-center gap-4">
+				<select
+					value={
+						currentLesson
+							? spanishData.lessons.findIndex(
+									(l) => l.lesson === currentLesson.lesson
+							  )
+							: 0
+					}
+					onChange={handleLessonChange}
+					className="px-2 py-1 border rounded"
 				>
-					{lessons.map((lesson, i) => (
+					{spanishData.lessons.map((lesson, i) => (
 						<option
 							key={i}
 							value={i}
 						>
-							Lesson {lesson.lesson}
+							Lesson {lesson.lesson} - {lesson.name}
 						</option>
 					))}
-				</select> */}
+				</select>
 
-				{/* <select
-					value={sentenceIndex}
-					onChange={(e) => dispatch(setSentence(Number(e.target.value)))}
-					className="bg-secondary text-primary p-1 rounded"
+				<select
+					value={
+						currentLesson?.sentences?.findIndex(
+							(s) => s.id === currentSentence?.id
+						) ?? 0
+					}
+					onChange={handleSentenceChange}
+					className="px-2 py-1 border rounded"
+					disabled={!currentLesson?.sentences?.length}
 				>
 					{currentLesson?.sentences?.map((_, i) => (
 						<option
@@ -50,7 +67,7 @@ const Header = () => {
 							Sentence {i + 1}
 						</option>
 					))}
-				</select> */}
+				</select>
 			</div>
 		</header>
 	)

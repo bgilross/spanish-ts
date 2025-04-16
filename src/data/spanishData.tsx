@@ -44,9 +44,9 @@ const { conj, pron, prep, advrb, noun, verb, artcl, dObj } = words
 // 	},
 // ]
 
-const spanishData: { lessons: Record<number, Lesson> } = {
-	lessons: {
-		1: {
+const spanishData: { lessons: Lesson[] } = {
+	lessons: [
+		{
 			lesson: 1,
 			name: "Lesson 1",
 			details: "INTRO: A Grammatical Approach to Language Learning",
@@ -66,7 +66,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 			wordBank: [],
 			sentences: [],
 		},
-		2: {
+		{
 			lesson: 2,
 			name: "Lesson 2",
 			details: "Deep foundational grammar!",
@@ -92,7 +92,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 			wordBank: [],
 			sentences: [],
 		},
-		3: {
+		{
 			lesson: 3,
 			name: "Lesson 3",
 			details: "Conjunctions (Y and QUE) and ESO",
@@ -355,7 +355,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		4: {
+		{
 			lesson: 4,
 			name: "Lesson 4",
 			details: "Prepositions: DE and A, Adverb NO ",
@@ -760,7 +760,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		5: {
+		{
 			lesson: 5,
 			name: "Lesson 5",
 			details: "Three common uses of DE!",
@@ -1182,7 +1182,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		6: {
+		{
 			lesson: 6,
 			name: "Lesson 6",
 			details: "THE! First Articles and Gender",
@@ -1369,7 +1369,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		7: {
+		{
 			lesson: 7,
 			name: "Lesson 7",
 			details: "Direct Objects: LO, LA. ",
@@ -1712,7 +1712,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		8: {
+		{
 			lesson: 8,
 			name: "Lesson 8",
 			details: "Direct Obj Pronouns: TE, and ME. and Artcls: UN and UNA",
@@ -1921,7 +1921,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		9: {
+		{
 			lesson: 9,
 			name: "Lesson 9",
 			details: "Prepositions: POR and PARA, CON and EN!",
@@ -2337,7 +2337,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		10: {
+		{
 			lesson: 10,
 			name: "Lesson 10",
 			details: "Articles and Direct Obj Pronouns: LOS and LAS",
@@ -2833,7 +2833,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		11: {
+		{
 			lesson: 11,
 			name: "Lesson 11",
 			details: "Expressing abstract ideas",
@@ -3347,7 +3347,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		12: {
+		{
 			lesson: 12,
 			name: "Lesson 12",
 			details: "Verbs: ES means IS in Spanish!",
@@ -3829,7 +3829,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		13: {
+		{
 			lesson: 13,
 			name: "Lesson 13",
 			details: "Verbs: Conjugating SER",
@@ -4392,7 +4392,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 				},
 			],
 		},
-		14: {
+		{
 			lesson: 14,
 			name: "Lesson 14",
 			details: "Disappearing Subject Pronouns",
@@ -4902,7 +4902,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 			],
 			wordBank: [],
 		},
-		15: {
+		{
 			lesson: 15,
 			name: "Lesson 15",
 			details: "REVIEW: Ser and Everything Else!",
@@ -5504,7 +5504,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 			],
 			wordBank: [],
 		},
-		16: {
+		{
 			lesson: 16,
 			name: "Lesson 16",
 			details: "New ways to use SER. SER and Prepositions",
@@ -6044,7 +6044,7 @@ const spanishData: { lessons: Record<number, Lesson> } = {
 			],
 			wordBank: [],
 		},
-	},
+	],
 }
 
 export default spanishData
