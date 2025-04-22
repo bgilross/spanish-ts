@@ -1,6 +1,8 @@
 "use client"
 
 import { useDataStore } from "@/data/dataStore"
+import { useUIStore } from "@/data/uiStore"
+
 import spanishData from "@/data/spanishData"
 
 const Header = () => {
@@ -8,6 +10,7 @@ const Header = () => {
 	const setLesson = useDataStore((s) => s.setCurrentLesson)
 	const currentSentence = useDataStore((s) => s.currentSentence)
 	const setSentence = useDataStore((s) => s.setCurrentSentence)
+	const openLessonInfoModal = useUIStore((s) => s.openLessonInfoModal)
 
 	const handleLessonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const index = parseInt(e.target.value, 10)
@@ -44,7 +47,7 @@ const Header = () => {
 							key={i}
 							value={i}
 						>
-							Lesson {lesson.lesson} - {lesson.name}
+							Lesson {lesson.lesson} - {lesson.details}
 						</option>
 					))}
 				</select>
@@ -68,6 +71,13 @@ const Header = () => {
 						</option>
 					))}
 				</select>
+
+				<button
+					className="bg-blue-600 text-white px-4 py-1 rounded"
+					onClick={openLessonInfoModal}
+				>
+					View Lesson Info
+				</button>
 			</div>
 		</header>
 	)
