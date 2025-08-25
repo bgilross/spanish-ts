@@ -153,7 +153,7 @@ const spanishWords: SpanishWords = {
 			que: {
 				id: "pron.que",
 				translations: ["what"],
-				word: "que",
+				word: "qué",
 				info: [
 					"Qué can mean HOW in the sense of HOW lucky, would be Qué Lucky! or What Lucky!/What Luck!",
 					"Para qué is an idiom which means 'So that' or 'In order that'",
