@@ -39,7 +39,7 @@ export type SentenceDataEntry =
 	| {
 			phrase: string
 			translation?: WordObject | string
-			mixup?: WordObject | WordObject[] // For when a word might be confused with another
+			mixup?: WordObject | WordObject[] // For when a word might be confused with anotherw
 	  }
 	| {
 			phrase: string
@@ -73,4 +73,43 @@ export interface VerbGroup {
 	name: string
 	info: string[]
 	words: Record<string, VerbRoot>
+}
+
+export type QuizType = "parts" | "full"
+
+export type TranslatedWordEntry = {
+	index: number
+	words: string[]
+	phraseTranslation?: string | null
+}
+
+export type CurrentSectionEntry = { section: SentenceDataEntry; index: number }
+
+export type ErrorWord = {
+	word: WordObject
+	sectionInd: number
+	phrase?: string | string[] | null
+	currentSection?: SentenceDataEntry
+}
+
+export type ErrorEntry = {
+	userInput: string
+	currentSentence: Sentence
+	currentSection: SentenceDataEntry
+	lessonNumber: number
+	errorWords: ErrorWord[]
+	references: string[]
+	mode: QuizType
+}
+
+export type SubmissionLog = {
+	lessonNumber: number
+	sentenceIndex: number
+	sectionIndex: number | null
+	quizType: QuizType
+	feedbackMode: boolean
+	sentence: Sentence
+	section: SentenceDataEntry
+	isCorrect: boolean
+	userInput: string
 }

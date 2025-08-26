@@ -7,7 +7,7 @@ interface UIState {
 }
 
 export const useUIStore = create<UIState>((set) => ({
-	showLessonInfoModal: false,
+	showLessonInfoModal: true,
 	openLessonInfoModal: () => set({ showLessonInfoModal: true }),
 	closeLessonInfoModal: () => set({ showLessonInfoModal: false }),
 }))

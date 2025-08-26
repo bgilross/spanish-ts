@@ -2,47 +2,40 @@
 
 import { useDataStore } from "@/data/dataStore"
 import { useUIStore } from "@/data/uiStore"
-
-import spanishData from "@/data/spanishData"
+import QuizModeSwitcher from "./QuizModeSwitcher"
 
 const Header = () => {
+	const lessons = useDataStore((s) => s.lessons)
+
 	const currentLesson = useDataStore((s) => s.currentLesson)
-	const setLesson = useDataStore((s) => s.setCurrentLesson)
-	const currentSentence = useDataStore((s) => s.currentSentence)
-	const setSentence = useDataStore((s) => s.setCurrentSentence)
+	const currentLessonIndex = useDataStore((s) => s.currentLessonIndex)
+	const currentSentenceIndex = useDataStore((s) => s.currentSentenceIndex)
+
+	const setLessonIndex = useDataStore((s) => s.setLessonIndex)
+	const setSentenceIndex = useDataStore((s) => s.setSentenceIndex)
+
 	const openLessonInfoModal = useUIStore((s) => s.openLessonInfoModal)
 
 	const handleLessonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const index = parseInt(e.target.value, 10)
-		const lesson = spanishData.lessons[index]
-		setLesson(lesson)
-		if (lesson.sentences?.[0]) setSentence(lesson.sentences[0])
+		setLessonIndex(index)
 	}
 
 	const handleSentenceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const index = parseInt(e.target.value, 10) //coerce string to int. dropdowns are always string?
-		if (currentLesson?.sentences?.[index]) {
-			setSentence(currentLesson.sentences[index])
-		} else {
-			console.log("No sentence # " + index + " found for this lesson.")
-		}
+		const index = parseInt(e.target.value, 10)
+		setSentenceIndex(index)
 	}
 
 	return (
 		<header className="w-full p-4 bg-gray-100 border-b flex justify-center">
 			<div className="flex items-center gap-4">
+				<QuizModeSwitcher />
 				<select
-					value={
-						currentLesson
-							? spanishData.lessons.findIndex(
-									(l) => l.lesson === currentLesson.lesson
-							  )
-							: 0
-					}
+					value={currentLessonIndex}
 					onChange={handleLessonChange}
 					className="px-2 py-1 border rounded"
 				>
-					{spanishData.lessons.map((lesson, i) => (
+					{lessons.map((lesson, i) => (
 						<option
 							key={i}
 							value={i}
@@ -53,11 +46,7 @@ const Header = () => {
 				</select>
 
 				<select
-					value={
-						currentLesson?.sentences?.findIndex(
-							(s) => s.id === currentSentence?.id
-						) ?? 0
-					}
+					value={currentSentenceIndex >= 0 ? currentSentenceIndex : 0}
 					onChange={handleSentenceChange}
 					className="px-2 py-1 border rounded"
 					disabled={!currentLesson?.sentences?.length}
