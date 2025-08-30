@@ -15,23 +15,14 @@ function isSectionTranslatable(s: SentenceDataEntry): boolean {
 }
 
 export default function Sentence() {
-	const {
-		quizType,
-		randomizedSentences,
-		sentenceIndex,
-		currentSections,
-		sectionIndex,
-		translatedWords,
-		userInput,
-	} = useQuizStore((s) => ({
-		quizType: s.quizType,
-		randomizedSentences: s.randomizedSentences,
-		sentenceIndex: s.sentenceIndex,
-		currentSections: s.currentSections,
-		sectionIndex: s.sectionIndex,
-		translatedWords: s.translatedWords,
-		userInput: s.userInput,
-	}))
+	// IMPORTANT: select each field separately (avoid returning a new object every render)
+	const quizType = useQuizStore((s) => s.quizType)
+	const randomizedSentences = useQuizStore((s) => s.randomizedSentences)
+	const sentenceIndex = useQuizStore((s) => s.sentenceIndex)
+	const currentSections = useQuizStore((s) => s.currentSections)
+	const sectionIndex = useQuizStore((s) => s.sectionIndex)
+	const translatedWords = useQuizStore((s) => s.translatedWords)
+	const userInput = useQuizStore((s) => s.userInput)
 
 	const currentSentence = randomizedSentences?.[sentenceIndex]
 	const currentSectionEntry =
@@ -117,7 +108,7 @@ export default function Sentence() {
 			)
 		}
 
-		// parts mode: render each section dynamically
+		// For "parts", render each section dynamically
 		const currentSectionIndex =
 			currentSections?.[sectionIndex ?? 0]?.index ?? -1
 
@@ -182,9 +173,9 @@ export default function Sentence() {
 	])
 
 	useEffect(() => {
-		// Debugging parity with spanish2
-		// console.log("Sentence updated:", { quizType, sentenceIndex, sectionIndex, translatedWords })
-	}, [quizType, sentenceIndex, sectionIndex, translatedWords])
+		// Optional: log once you see content appearing
+		// console.log("Sentence ready:", { hasSentence: !!currentSentence })
+	}, [currentSentence])
 
 	if (!currentSentence) return null
 

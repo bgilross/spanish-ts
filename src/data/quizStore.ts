@@ -289,13 +289,22 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 		})
 	},
 
-	setUserInput: (val: string) => set({ userInput: val }),
+	setUserInput: (val: string) => {
+		console.log("setUserInput", val)
+		set({ userInput: val })
+	},
 
 	handleUserSubmit: (input?: string) => {
+		console.log("handleUserSubmit", input)
 		const state = get()
+		console.log("Current state:", state)
 		const sentence = state.randomizedSentences[state.sentenceIndex]
-		if (!sentence) return
+		if (!sentence) {
+			console.warn("No current sentence found.")
+			return
+		}
 		const sectionIdx = state.sectionIndex
+		console.log("Current section index:", sectionIdx)
 		if (sectionIdx === null || sectionIdx === undefined) return
 		const currentSection = state.currentSections[sectionIdx]?.section
 		if (!currentSection) return
@@ -322,10 +331,12 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 		set({ lessonLog: [...state.lessonLog, submissionLog] })
 
 		if (correct) {
-			if (state.feedbackMode) {
-				set({ showFeedbackModal: true })
-				return
-			}
+			console.log("Answer is correct")
+			// if (state.feedbackMode) {
+			// 	console.log("Showing feedback modal")
+			// 	set({ showFeedbackModal: true })
+			// 	return
+			// }
 
 			// Update translated words (parts mode only)
 			let updatedTranslated = state.translatedWords
@@ -360,7 +371,9 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 				state.sentenceIndex,
 				updatedTranslated
 			)
+			console.log(state.quizType, nextSection)
 			if (state.quizType === "parts" && nextSection !== null) {
+				console.log("Next section:", nextSection)
 				set({
 					sectionIndex: nextSection,
 					translatedWords: updatedTranslated,
@@ -413,6 +426,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 		sentenceIdx?: number,
 		translated?: TranslatedWordEntry[]
 	) => {
+		console.log("getNextSection", sentenceIdx, translated)
 		const state = get()
 		const sIdx = sentenceIdx ?? state.sentenceIndex
 		const sentence = state.randomizedSentences[sIdx]
@@ -433,6 +447,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
 	},
 
 	getNextSentence: (nextIndex?: number) => {
+		console.log("getNextSentence", nextIndex)
 		const state = get()
 		const idx = nextIndex ?? state.sentenceIndex + 1
 		const hasMore = idx < state.randomizedSentences.length
