@@ -45,7 +45,7 @@ const Header = () => {
 					))}
 				</select>
 
-				<select
+				{/* <select
 					value={currentSentenceIndex >= 0 ? currentSentenceIndex : 0}
 					onChange={handleSentenceChange}
 					className="px-2 py-1 border rounded"
@@ -59,7 +59,7 @@ const Header = () => {
 							Sentence {i + 1}
 						</option>
 					))}
-				</select>
+				</select> */}
 
 				<button
 					className="bg-blue-600 text-white px-4 py-1 rounded"
